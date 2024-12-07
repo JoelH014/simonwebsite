@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pendaftaran</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // Mencegah pengiriman form default
+
+            const nama = document.getElementById('nama').value.trim();
+            const telepon = document.getElementById('telepon').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Validasi nama
+            if (nama.length === 0 || nama.length > 40) {
+                alert('Nama harus diisi dan maksimal 40 karakter.');
+                return false;
+            }
+
+            // Validasi nomor telepon
+            const teleponPattern = /^[0-9]{1,15}$/;
+            if (!teleponPattern.test(telepon)) {
+                alert('Nomor telepon harus berisi angka saja dengan maksimal 15 digit.');
+                return false;
+            }
+
+            // Validasi email
+            const emailPattern = /^[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                alert('Email harus dalam format yang benar.');
+                return false;
+            }
+
+            // Validasi password
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$/;
+            if (!passwordPattern.test(password)) {
+                alert('Kata sandi harus terdiri dari 8-16 karakter, setidaknya 1 huruf besar, 1 huruf kecil, dan 1 angka. Tidak boleh mengandung simbol.');
+                return false;
+            }
+
+            // Jika semua validasi lolos
+            alert('Pendaftaran Berhasil!');
+            return true;
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="bg-blue-600 text-white py-4 shadow-md">
+        <ul class="flex justify-center space-x-8">
+            <li><a href="index.html" class="hover:text-gray-300">Homepage</a></li>
+            <li><a href="about.html" class="hover:text-gray-300">About</a></li>
+            <li><a href="myHoliday.html" class="hover:text-gray-300">My Holiday</a></li>
+            <li><a href="Calculator.html"hover:text-gray-300>Calculator</a></li>
+            <li><a href="registration.html" class="hover:text-gray-300">Registration</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header -->
+    <header class="text-center py-8">
+        <h1 class="text-3xl font-bold text-blue-600">Formulir Pendaftaran</h1>
+        <p class="text-gray-700 mt-2">Silakan isi formulir di bawah ini untuk mendaftar.</p>
+    </header>
+
+    <!-- Formulir Pendaftaran -->
+    <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
+        <form onsubmit="validateForm(event)" class="space-y-4">
+            <div>
+                <label for="nama" class="block font-semibold text-gray-700">Nama:</label>
+                <input type="text" id="nama" name="nama" maxlength="40" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <label for="telepon" class="block font-semibold text-gray-700">Nomor Telepon:</label>
+                <input type="tel" id="telepon" name="telepon" pattern="[0-9]{1,15}" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <label for="email" class="block font-semibold text-gray-700">Email:</label>
+                <input type="email" id="email" name="email" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <label for="password" class="block font-semibold text-gray-700">Kata Sandi:</label>
+                <input type="password" id="password" name="password" minlength="8" maxlength="16" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Kirim</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white text-center py-4 mt-10">
+        <p>&copy; 2024 Simon Joel Roring - All Rights Reserved</p>
+    </footer>
+</body>
+</html>
